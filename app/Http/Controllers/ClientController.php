@@ -3,21 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Entities\Client;
 use App\Repositories\ClientRepository;
-use App\Repositories\ClientRepositoryEloquent;
 
 class ClientController extends Controller
 {
 
     /**
+     *
+     * @var ClientRepository 
+     */
+    private $repository;
+    
+    public function __construct(ClientRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index(ClientRepository $repository)
+    public function index()
     {
-        return $repository->all();
+        return $this->repository->all();
     }
 
     /**
@@ -25,9 +33,9 @@ class ClientController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return $this->repository->create($request->all());
     }
 
     /**

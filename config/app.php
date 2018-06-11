@@ -176,7 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+                
+        /*flp*/
+        App\Providers\AppRepositoryProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,        
     ],
 
