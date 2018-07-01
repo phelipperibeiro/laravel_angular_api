@@ -19,3 +19,4 @@ use Illuminate\Http\Request;
 
 
 Route::get('clientes', 'ClientController@index');
+Route::post('clientes', 'ClientController@create');

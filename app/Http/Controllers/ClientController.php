@@ -34,7 +34,7 @@ class ClientController extends Controller
      * @return Response
      */
     public function create(Request $request)
-    {
+    {        
         return $this->repository->create($request->all());
     }
 
@@ -56,7 +56,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->repository->find($id);
     }
 
     /**
@@ -67,7 +67,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->repository->find($id);
     }
 
     /**
@@ -76,9 +76,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-        //
+    public function update(Request $request, $id)
+    {       
+        return $this->repository->find($id)->update($request->all());
     }
 
     /**
@@ -89,7 +89,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->repository->delete($id);
     }
 
 }
