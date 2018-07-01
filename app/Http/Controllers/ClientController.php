@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\ClientRepository;
+use App\Repositories\Contracts\ClientRepository;
 
 class ClientController extends Controller
 {
