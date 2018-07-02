@@ -76,10 +76,5 @@ class ClientService
             ];
         }
     }
-
-    public function destroy($id)
-    {
-        return $this->repository->delete($id);
-    }
-
+    
 }

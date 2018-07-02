@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\ClientRepository;
+use App\Service\ClientService;
 
 class ClientController extends Controller
 {
@@ -13,11 +14,20 @@ class ClientController extends Controller
      * @var ClientRepository 
      */
     private $repository;
-    
-    public function __construct(ClientRepository $repository)
+
+    /**
+     *
+     * @var ClientService 
+     */
+    private $service;
+
+    public function __construct(ClientRepository $repository, ClientService $service)
     {
         $this->repository = $repository;
+        
+        $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,18 +44,8 @@ class ClientController extends Controller
      * @return Response
      */
     public function create(Request $request)
-    {        
-        return $this->repository->create($request->all());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
     {
-        //
+        return $this->service->create($request->all());
     }
 
     /**
@@ -57,19 +57,8 @@ class ClientController extends Controller
     public function show($id)
     {
         return $this->repository->find($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return $this->repository->find($id);
-    }
-
+    }    
+    
     /**
      * Update the specified resource in storage.
      *
@@ -77,8 +66,8 @@ class ClientController extends Controller
      * @return Response
      */
     public function update(Request $request, $id)
-    {       
-        return $this->repository->find($id)->update($request->all());
+    {
+        return $this->service->update($request->all(), $id);
     }
 
     /**
