@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+use App\Validators\ClientValidator;
+use Prettus\Validator\Exceptions\ValidatorException;
+
 class ClientService
 {
 
@@ -9,13 +12,20 @@ class ClientService
      *
      * @var ClientRepository 
      */
-    private $repository;
-    
-    public function __construct(ClientRepository $repository)
+    protected $repository;
+
+    /**
+     *
+     * @var ClientValidator 
+     */
+    protected $validator;
+
+    public function __construct(ClientRepository $repository, ClientValidator $validator)
     {
         $this->repository = $repository;
+        $this->validator = $validator;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -31,41 +41,19 @@ class ClientService
      *
      * @return Response
      */
-    public function create(Request $request)
-    {        
-        return $this->repository->create($request->all());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
+    public function create($data)
     {
-        //
-    }
+        try {
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return $this->repository->find($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return $this->repository->find($id);
+            $this->validator($data)->passesOrFail();
+            return $this->repository->create($request->all());
+            
+        } catch (ValidatorException $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
     }
 
     /**
@@ -74,17 +62,21 @@ class ClientService
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
-    {       
-        return $this->repository->find($id)->update($request->all());
+    public function update($data, $id)
+    {
+        try {
+
+            $this->validator($data)->passesOrFail();
+            return $this->repository->find($id)->update($data);
+            
+        } catch (ValidatorException $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function destroy($id)
     {
         return $this->repository->delete($id);
