@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Validators\ClientValidator;
 use App\Repositories\Contracts\ClientRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 class ClientService
 {
@@ -46,8 +47,8 @@ class ClientService
     {
         try {
 
-            $this->validator($data)->passesOrFail();
-            return $this->repository->create($request->all());
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+            return $this->repository->create($data);
             
         } catch (ValidatorException $e) {
             return [
@@ -67,7 +68,7 @@ class ClientService
     {
         try {
 
-            $this->validator($data)->passesOrFail();
+            $this->validator($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
             return $this->repository->find($id)->update($data);
             
         } catch (ValidatorException $e) {
