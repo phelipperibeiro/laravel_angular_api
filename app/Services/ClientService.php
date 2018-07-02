@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Validators\ClientValidator;
+use App\Repositories\Contracts\ClientRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ClientService
