@@ -19,4 +19,7 @@ use Illuminate\Http\Request;
 
 
 Route::get('clientes', 'ClientController@index');
+Route::get('clientes/{id}', 'ClientController@show');
 Route::post('clientes', 'ClientController@create');
+Route::update('clientes', 'ClientController@create');
+Route::delete('clientes/{id}', 'ClientController@destroy');
