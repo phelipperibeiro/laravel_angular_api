@@ -7,15 +7,7 @@ use \Prettus\Validator\Contracts\ValidatorInterface;
 
 class ProjectValidator extends LaravelValidator
 {
-
-    protected $messages = [
-        'required' => 'The :attribute field is required.',
-        'email.required' => 'We need to know your e-mail address!',
-    ];
-    protected $attributes = [
-        'email' => 'E-mail',
-        'obs' => 'Observation',
-    ];
+    
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'owner_id' => 'required|integer',
