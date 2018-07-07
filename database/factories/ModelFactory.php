@@ -12,9 +12,9 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
-
+    
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
+$factory->define(App\Entities\Client::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'responsible' => $faker->name,
@@ -31,5 +31,17 @@ $factory->define(App\Models\Client::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
         'obs' => $faker->sentence,
+    ];
+});
+
+$factory->define(App\Entities\Project::class, function (Faker\Generator $faker) {
+    return [
+        'owner_id' => rand(1,5),
+        'client_id' => rand(1,5),
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+        'progress' => rand(1,100),
+        'status' => rand(1,3),
+        'due_date' => $faker->dateTime('now')
     ];
 });

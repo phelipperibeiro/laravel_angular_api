@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Entities\Client;
+use App\Entities\Project;
 
-class ClientTableSeeder extends Seeder
+class ProjectTableSeeder extends Seeder
 {
 
     /**
@@ -13,8 +13,8 @@ class ClientTableSeeder extends Seeder
      */
     public function run()
     {
-        //Client::truncate();
-        Factory(Client::class, 10)->create();
+        //Project::truncate();
+        Factory(Project::class, 10)->create();
     }
 
 }
