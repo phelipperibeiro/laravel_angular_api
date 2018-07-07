@@ -18,8 +18,14 @@ use Illuminate\Http\Request;
 //});
 
 
-Route::get('clientes', 'ClientController@index');
-Route::get('clientes/{id}', 'ClientController@show');
-Route::post('clientes', 'ClientController@create');
-Route::put('clientes', 'ClientController@create');
-Route::delete('clientes/{id}', 'ClientController@destroy');
+Route::get('client', 'ClientController@index');
+Route::get('client/{id}', 'ClientController@show');
+Route::post('client', 'ClientController@create');
+Route::put('client', 'ClientController@create');
+Route::delete('client/{id}', 'ClientController@destroy');
+
+Route::get('project', 'ProjectController@index');
+Route::get('project/{id}', 'ProjectController@show');
+Route::post('project', 'ProjectController@create');
+Route::put('project', 'ProjectController@create');
+Route::delete('project/{id}', 'ProjectController@destroy');

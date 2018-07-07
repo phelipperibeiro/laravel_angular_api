@@ -7,7 +7,7 @@ use App\Repositories\Contracts\ProjectNoteRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
-class ProjectService
+class ProjectNoteService
 {
 
     /**
