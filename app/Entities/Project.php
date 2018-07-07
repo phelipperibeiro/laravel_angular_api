@@ -29,4 +29,9 @@ class Project extends Model implements Transformable
         'status',
         'due_date'];
 
+    public function notes()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }
