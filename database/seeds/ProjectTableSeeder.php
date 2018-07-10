@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Entities\ProjectNote;
 
-class ProjectNoteTableSeeder extends Seeder
+class ProjectTableSeeder extends Seeder
 {
 
     /**
@@ -13,8 +13,8 @@ class ProjectNoteTableSeeder extends Seeder
      */
     public function run()
     {
-        //ProjectNote::truncate();
-        Factory(ProjectNote::class, 10)->create();
+        //Project::truncate();
+        Factory(Project::class, 10)->create();
     }
 
 }
