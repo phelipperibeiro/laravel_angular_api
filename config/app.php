@@ -179,7 +179,8 @@ return [
                 
         /*flp*/
         App\Providers\AppRepositoryProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,        
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,       
+	Laravel\Passport\PassportServiceProvider::class, 
     ],
 
     /*
