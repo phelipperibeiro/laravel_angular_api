@@ -35,7 +35,7 @@ Route::middleware('auth:api')->group(function(){
     Route::delete('project/{id}/note/{nodeId}', 'ProjectNoteController@destroy');
 
     
-    //Route::middleware('CheckProjectOwner')->group(function(){
+    Route::middleware('CheckProjectOwner')->group(function(){
         
         Route::get('project', 'ProjectController@index');
         Route::get('project/{id}', 'ProjectController@show');
@@ -43,7 +43,7 @@ Route::middleware('auth:api')->group(function(){
         Route::post('project', 'ProjectController@create');
         Route::delete('project/{id}', 'ProjectController@destroy');
         
-    //});
+    });
     
     Route::get('user/me', function(Request $request){
        return $request->user(); 
