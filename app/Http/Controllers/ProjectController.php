@@ -11,20 +11,20 @@ class ProjectController extends Controller
 
     /**
      *
-     * @var ClientRepository 
+     * @var ProjectRepository 
      */
     private $repository;
 
     /**
      *
-     * @var ClientService 
+     * @var ProjectService 
      */
     private $service;
 
     public function __construct(ProjectRepository $repository, ProjectService $service)
     {
         $this->repository = $repository;
-        
+
         $this->service = $service;
     }
 
@@ -34,8 +34,10 @@ class ProjectController extends Controller
      * @return Response
      */
     public function index()
-    {       
-        return $this->repository->all();
+    {
+        $user_id = auth()->guard('api')->user()->id;
+        
+        return $this->repository->findWhere(['owner_id' => $user_id]);
     }
 
     /**
@@ -55,10 +57,10 @@ class ProjectController extends Controller
      * @return Response
      */
     public function show($id)
-    {
+    {      
         return $this->repository->find($id);
-    }    
-    
+    }
+
     /**
      * Update the specified resource in storage.
      *

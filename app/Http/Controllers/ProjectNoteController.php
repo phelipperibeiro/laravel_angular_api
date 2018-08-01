@@ -11,13 +11,13 @@ class ProjectNoteController extends Controller
 
     /**
      *
-     * @var ProjectRepository 
+     * @var ProjectNoteRepository 
      */
     private $repository;
 
     /**
      *
-     * @var ProjectRepository 
+     * @var ProjectNoteService 
      */
     private $service;
 
