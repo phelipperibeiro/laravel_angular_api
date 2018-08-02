@@ -36,7 +36,7 @@ class ProjectController extends Controller
     public function index()
     {
         $user_id = auth()->guard('api')->user()->id;
-        
+
         return $this->repository->findWhere(['owner_id' => $user_id]);
     }
 
@@ -57,7 +57,11 @@ class ProjectController extends Controller
      * @return Response
      */
     public function show($id)
-    {      
+    {
+        if(!$this->checkProjectPermissions($id)){
+            return ['error' => 'Acess Forbidden'];
+        }
+        
         return $this->repository->find($id);
     }
 
@@ -69,6 +73,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!$this->checkProjectPermissions($id)){
+            return ['error' => 'Acess Forbidden'];
+        }
+        
         return $this->service->update($request->all(), $id);
     }
 
@@ -79,8 +87,35 @@ class ProjectController extends Controller
      * @return Response
      */
     public function destroy($id)
-    {
+    {        
+        if(!$this->checkProjectOwner($id)){
+            return ['error' => 'Acess Forbidden'];
+        }
+        
         return $this->repository->delete($id);
+    }
+
+    private function checkProjectOwner($projectId)
+    {
+        $userId = auth()->guard('api')->user()->id;
+
+        return $this->repository->isOwner($projectId, $userId);
+    }
+
+    private function checkProjectMember($projectId)
+    {
+        $userId = auth()->guard('api')->user()->id;
+
+        return $this->repository->hasMember($projectId, $userId);
+    }
+
+    private function checkProjectPermissions($projectId)
+    {
+        if ($this->checkProjectOwner($projectId) || $this->checkProjectMember($projectId)) {
+            return true;
+        }
+
+        return false;
     }
 
 }

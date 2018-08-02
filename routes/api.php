@@ -34,17 +34,12 @@ Route::middleware('auth:api')->group(function(){
     Route::post('project/{id}/note', 'ProjectNoteController@create');
     Route::delete('project/{id}/note/{nodeId}', 'ProjectNoteController@destroy');
 
-    
-    Route::middleware('CheckProjectOwner')->group(function(){
+    Route::get('project', 'ProjectController@index');
+    Route::get('project/{id}', 'ProjectController@show');
+    Route::put('project', 'ProjectController@update');
+    Route::post('project', 'ProjectController@create');
+    Route::delete('project/{id}', 'ProjectController@destroy');
         
-        Route::get('project', 'ProjectController@index');
-        Route::get('project/{id}', 'ProjectController@show');
-        Route::put('project', 'ProjectController@update');
-        Route::post('project', 'ProjectController@create');
-        Route::delete('project/{id}', 'ProjectController@destroy');
-        
-    });
-    
     Route::get('user/me', function(Request $request){
        return $request->user(); 
     });
