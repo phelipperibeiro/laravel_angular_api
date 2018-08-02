@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Contracts\ProjectRepository;
+use App\Presenters\ProjectPresenter;
 use App\Entities\Project;
 use App\Validators\ProjectValidator;
 
@@ -56,4 +57,8 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
         return false;
     }
 
+    public function presenter()
+    {
+        return ProjectPresenter::class;
+    }
 }
