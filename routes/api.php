@@ -39,6 +39,8 @@ Route::middleware('auth:api')->group(function(){
     Route::put('project', 'ProjectController@update');
     Route::post('project', 'ProjectController@create');
     Route::delete('project/{id}', 'ProjectController@destroy');
+    
+    Route::post('project/{id}/file', 'ProjectFileController@store');
         
     Route::get('user/me', function(Request $request){
        return $request->user(); 
