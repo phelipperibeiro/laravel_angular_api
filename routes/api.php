@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 //});
 
 // Collection Link
-// https://www.getpostman.com/collections/2c37a3cf49ac40d15e58
+// https://www.getpostman.com/collections/0c843890bbc4248487c6
 
 Route::middleware('auth:api')->group(function(){
     
